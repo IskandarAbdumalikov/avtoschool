@@ -1,0 +1,26 @@
+.admin-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 3px solid rgba(219, 219, 219, 0.1);
+  h1 {
+    color: white;
+    @media (max-width: 450px) {
+      font-size: 24px;
+    }
+  }
+  &__logout-btn {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: 0.3s;
+    color: white;
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+}

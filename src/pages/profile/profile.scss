@@ -1,0 +1,130 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  color: #34495e;
+  margin-top: 20px;
+
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    @media (max-width: 602px) {
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .created-at,
+    .updated-at {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+  }
+
+  .profile-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .profile-item {
+      padding: 15px;
+      background-color: #ecf0f1;
+      border-left: 4px solid #3498db;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      color: #2c3e50;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #d0e7f9;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+      }
+    }
+
+    .edit-btn {
+      background-color: #2ecc71;
+
+      &:hover {
+        background-color: #27ae60;
+      }
+    }
+
+    .reset-btn {
+      background-color: #e74c3c;
+
+      &:hover {
+        background-color: #c0392b;
+      }
+    }
+  }
+}
+
+/* Responsivlik */
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+
+    .created-at,
+    .updated-at {
+      position: static;
+      margin-bottom: 5px;
+    }
+  }
+
+  .profile-info {
+    gap: 10px;
+
+    .profile-item {
+      padding: 10px;
+      font-size: 1rem;
+    }
+  }
+
+  .profile-actions {
+    flex-direction: column;
+    gap: 10px;
+
+    button {
+      width: 100%;
+    }
+  }
+}
