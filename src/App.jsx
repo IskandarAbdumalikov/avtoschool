@@ -24,8 +24,8 @@ const App = () => {
             <Route path="choosingTopic" element={<Topics />} />
             <Route path="choosingBilet" element={<Bilets />} />
             <Route path="randomBilet" element={<Random />} />
-            <Route path="choosingBilet/solving/:id" element={<Solving />} />
           </Route>
+          <Route path="/solving/:id" element={<Solving />} />
         </Route>
       </Routes>
       <ToastContainer />

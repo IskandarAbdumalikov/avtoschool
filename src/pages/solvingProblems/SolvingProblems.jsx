@@ -3,6 +3,8 @@ import "./solving.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import { Bilets } from "../../data/Data";
 import gentra from "../../assets/gentra.png";
+import logo from "../../assets/logo.png";
+import { LuX } from "react-icons/lu";
 
 const SolvingProblems = () => {
   const { id } = useParams();
@@ -12,7 +14,7 @@ const SolvingProblems = () => {
   const [current, setCurrent] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
   const [answeredStatus, setAnsweredStatus] = useState({});
-  const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
+  const [timeLeft, setTimeLeft] = useState(600);
   const [usedTime, setUsedTime] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
 
@@ -52,14 +54,6 @@ const SolvingProblems = () => {
     setCurrent(index);
   };
 
-  const handleNext = () => {
-    updateAnsweredStatus(current + 1);
-  };
-
-  const handlePrev = () => {
-    updateAnsweredStatus(current - 1);
-  };
-
   const handleCheck = () => {
     updateAnsweredStatus(current);
     setUsedTime(600 - timeLeft);
@@ -85,48 +79,41 @@ const SolvingProblems = () => {
   return (
     <div className="solving-container">
       <div className="header">
+        <img src={logo} alt="" />
+        <button>
+          <LuX onClick={() => navigate("/mainPage/profile")} />
+        </button>
+      </div>
+
+      <div className="question-number-top">
+        <div className="question-box">
+          {current + 1} - savol: {question.question}
+        </div>
         <span className="timer">
           {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
         </span>
       </div>
 
-      <div className="question-number-top">
-        <h2 className="question-text">
-          {current + 1} - savol: {question.question}
-        </h2>
-      </div>
-
       <div className="solving">
         <div className="left">
           <ul className="answers-list">
-            {question.answers.map((a) => (
-              <li key={a.id}>
-                <label>
-                  <input
-                    type="radio"
-                    name={question.id}
-                    value={a.id}
-                    checked={userAnswers[question.id]?.selected === a.id}
-                    onChange={() =>
-                      handleAnswer(question.id, a.id, question.correctAnswerId)
-                    }
-                    disabled={showSummary}
-                  />
-                  <span className="answer-text">{a.text}</span>
-                </label>
+            {question.answers.map((a, index) => (
+              <li
+                key={a.id}
+                onClick={() =>
+                  handleAnswer(question.id, a.id, question.correctAnswerId)
+                }
+                className={
+                  userAnswers[question.id]?.selected === a.id ? "selected" : ""
+                }
+              >
+                <div className="answer-text">
+                  <div className="answer-text__left">F{index + 1}</div>
+                  <div className="answer-text__right">{a.text}</div>
+                </div>
               </li>
             ))}
           </ul>
-          <div className="nav-buttons">
-            {current > 0 && <button onClick={handlePrev}>Oldingisi</button>}
-            {current < bilet.questions.length - 1 ? (
-              <button onClick={handleNext}>Keyingisi</button>
-            ) : (
-              <button disabled={!allAnswered} onClick={handleCheck}>
-                Tekshirish
-              </button>
-            )}
-          </div>
         </div>
 
         <div className="right">
@@ -138,22 +125,23 @@ const SolvingProblems = () => {
 
       <div className="navigation">
         {bilet.questions.map((q, idx) => {
-          const status = answeredStatus[q.id];
-          let className = "nav-btn";
-          if (idx === current) className += " current";
-          else if (status === true) className += " correct";
-          else if (status === false) className += " wrong";
+          const isCurrent = idx === current;
           return (
             <button
               key={q.id}
-              className={className}
-              disabled={idx === current}
+              className={`nav-btn-rect ${isCurrent ? "current" : ""}`}
               onClick={() => updateAnsweredStatus(idx)}
+              disabled={isCurrent}
             >
               {idx + 1}
             </button>
           );
         })}
+        {current === bilet.questions.length - 1 && allAnswered && (
+          <button className="check-button" onClick={handleCheck}>
+            Tekshirish
+          </button>
+        )}
       </div>
 
       {showSummary && (
