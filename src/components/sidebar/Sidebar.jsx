@@ -83,7 +83,7 @@ const Sidebar = () => {
             to={"/mainPage/profile"}
           >
             <CgProfile />
-            <span>Kabinetim</span>
+            <span>Profil</span>
           </Link>
         </li>
       </ul>

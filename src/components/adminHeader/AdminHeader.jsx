@@ -30,7 +30,7 @@ const AdminHeader = () => {
   };
   return (
     <div style={{ paddingLeft: 16, paddingTop: 16 }} className="admin-header">
-      <h1 className="admin-header__title">AVTOTEST</h1>
+      <h1 className="admin-header__title">AVTOSHKOLATEST</h1>
       <button className="admin-header__logout-btn" onClick={() => setOpen(true)}>
         <RiLogoutBoxLine />
       </button>

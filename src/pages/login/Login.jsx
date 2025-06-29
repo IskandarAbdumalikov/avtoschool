@@ -44,7 +44,7 @@ const Login = () => {
             LOGO
           </NavLink>
           <div className="login__right__bottom">
-            <h2>Hisobga kirish</h2>
+            <h2>Tizimga kirish</h2>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -96,7 +96,7 @@ const Login = () => {
           </div>
         </div>
         <div className="login__left">
-          <h2>Yangi hisob yaratish</h2>
+          <h2>Profil yaratish</h2>
           <p>
             Hisobingizni yaratish orqali bizning xizmatlarimizdan
             foydalanishingiz mumkin
@@ -105,7 +105,7 @@ const Login = () => {
             onClick={() => setOpenRegister(true)}
             className="login__left__btn"
           >
-            Hisob yaratish
+            Profil yaratish
           </button>
         </div>
       </div>
