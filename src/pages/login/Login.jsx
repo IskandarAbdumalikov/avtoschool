@@ -98,7 +98,7 @@ const Login = () => {
         <div className="login__left">
           <h2>Profil yaratish</h2>
           <p>
-            Hisobingizni yaratish orqali bizning xizmatlarimizdan
+            Profilingizni yaratish orqali bizning xizmatlarimizdan
             foydalanishingiz mumkin
           </p>
           <button

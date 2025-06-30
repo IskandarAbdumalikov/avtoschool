@@ -24,6 +24,8 @@ const SolvingProblems = () => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
+          setUsedTime(600);
+          setShowSummary(true);
           return 0;
         }
         return prev - 1;
@@ -33,6 +35,7 @@ const SolvingProblems = () => {
   }, [showSummary]);
 
   const handleAnswer = (questionId, answerId, correctId) => {
+    if (answeredStatus[questionId]) return; // prevent change if finalized
     setUserAnswers((prev) => ({
       ...prev,
       [questionId]: {
@@ -45,7 +48,7 @@ const SolvingProblems = () => {
   const updateAnsweredStatus = (index) => {
     const q = bilet.questions[current];
     const ans = userAnswers[q.id];
-    if (ans) {
+    if (ans && !answeredStatus[q.id]) {
       setAnsweredStatus((prev) => ({
         ...prev,
         [q.id]: ans.isCorrect,
@@ -79,7 +82,7 @@ const SolvingProblems = () => {
   return (
     <div className="solving-container">
       <div className="header">
-        <img src={logo} alt="" />
+        <h1>AVTOSHKOLATEST</h1>
         <button>
           <LuX onClick={() => navigate("/mainPage/profile")} />
         </button>
@@ -126,12 +129,22 @@ const SolvingProblems = () => {
       <div className="navigation">
         {bilet.questions.map((q, idx) => {
           const isCurrent = idx === current;
+          const isAnswered = answeredStatus[q.id];
+          const isCorrect = userAnswers[q.id]?.isCorrect;
           return (
             <button
               key={q.id}
-              className={`nav-btn-rect ${isCurrent ? "current" : ""}`}
+              className={`nav-btn-rect ${
+                isCurrent
+                  ? "current"
+                  : isAnswered
+                  ? isCorrect
+                    ? "correct"
+                    : "wrong"
+                  : ""
+              }`}
               onClick={() => updateAnsweredStatus(idx)}
-              disabled={isCurrent}
+              disabled={isAnswered || isCurrent}
             >
               {idx + 1}
             </button>
